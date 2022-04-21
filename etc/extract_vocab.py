@@ -13,8 +13,8 @@ if __name__ == '__main__':
     readme = """
     """
     parser = argparse.ArgumentParser(description=readme)
-    parser.add_argument("-t", '--table', dest = 'table', help = "table dataOld")
-    parser.add_argument("-s", '--summary', dest = 'summary', help = "summary dataOld")
+    parser.add_argument("-t", '--table', dest='table', help="table dataOld")
+    parser.add_argument("-s", '--summary', dest='summary', help="summary dataOld")
     args = parser.parse_args()
 
     if args.table is not None:
@@ -27,10 +27,12 @@ if __name__ == '__main__':
                 print(elements)
                 assert len(elements) == 4
                 for element in elements:
-                    if element not in table_vocab: table_vocab[element] = 1
-                    else: table_vocab[element] += 1
+                    if element not in table_vocab:
+                        table_vocab[element] = 1
+                    else:
+                        table_vocab[element] += 1
 
-        sorted_table_vocab = sorted(table_vocab.items(), key = lambda x:x[1], reverse=True)
+        sorted_table_vocab = sorted(table_vocab.items(), key=lambda x: x[1], reverse=True)
         table_outf = open(args.table + "_vocab", 'w')
         for (w, c) in sorted_table_vocab:
             table_outf.write("{}\t{}\n".format(w, c))
@@ -47,7 +49,7 @@ if __name__ == '__main__':
                 else:
                     summary_word_count[w] += 1
 
-        sorted_summary_word_count = sorted(summary_word_count.items(), key = lambda x:x[1], reverse=True)
+        sorted_summary_word_count = sorted(summary_word_count.items(), key=lambda x: x[1], reverse=True)
         summary_outf = open(args.summary + "_vocab", 'w')
         # for (w, c) in sorted_table_vocab:
         #     summary_outf.write("{}\t{}\n".format(w, c))

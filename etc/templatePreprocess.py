@@ -161,7 +161,7 @@ def cleanAxisLabel(label):
 
 
 def cleanAxisValue(value):
-    #print(value)
+    # print(value)
     if value == '-' or value == 'nan':
         return '0'
     cleanValue = re.sub('\s', '_', value)
@@ -241,8 +241,8 @@ def numberComparison(token, captionTokens, index, word, axisLabel):
         multiplier = checkForMultiplier(axisLabel, nextToken.lower())
         # floor100 = int(math.floor(word / 100.0)) * 100
         # ceil100 = int(math.ceil(word / 100.0)) * 100
-        #print(word)
-        #print(token)
+        # print(word)
+        # print(token)
         newWord = normal_round(word * multiplier)
         newWord1 = normal_round(word * multiplier, 1)
         newWord2 = normal_round(word * multiplier, 2)
@@ -309,8 +309,7 @@ def templateAssigner(token, valueArr, words, arrayIndex, axis):
     return [1, f'template{axis}Value[{arrayIndex}]']
 
 
-def compareToken(captionTokens, index, cleanTitle, xValueArr,
-                 yValueArr, cleanXAxis, cleanYAxis, entities):
+def compareToken(captionTokens, index, cleanTitle, xValueArr,yValueArr, cleanXAxis, cleanYAxis, entities):
     token = captionTokens[index].replace(',', '').lower()
     if is_word_number(token):
         token = str(text2num(token, 'en'))
@@ -403,10 +402,9 @@ def compareToken(captionTokens, index, cleanTitle, xValueArr,
 
 
 def getSubject(titleTokens, nerEntities):
-    entities = {}
-    entities['Subject'] = []
-    entities['Date'] = []
+    entities = {'Subject': [], 'Date': []}
     # manually find dates, it performs better than using NER
+    print("titleTokens ......", titleTokens)
     for word in titleTokens:
         if word.isnumeric():
             if len(word) > 3:
@@ -420,6 +418,7 @@ def getSubject(titleTokens, nerEntities):
             if len(word) > 3:
                 entities['Date'].append(word)
     # get named entites from title
+    # print("nerEntities     ", nerEntities)
     for X in nerEntities:
         if X.label_ == 'GPE' or X.label_ == 'ORG' or X.label_ == 'NORP' or X.label_ == 'LOC':
             cleanSubject = [word for word in X.text.split() if word.isalpha() and word not in fillers]
@@ -434,25 +433,32 @@ def getSubject(titleTokens, nerEntities):
         uppercaseWords = [word for word in titleTokens if word[0].isupper()]
         if len(uppercaseWords) > 1:
             guessedSubject = ' '.join(uppercaseWords[1:])
-        else:
+            # print('ligne 436 dans le if......guessedSubject', guessedSubject)
+        elif len(uppercaseWords) == 1:
+            # print('ligne 439 dans le elif....before guessed subject ....', uppercaseWords)
             guessedSubject = uppercaseWords[0]
+            # print('ligne 441 dans le else....after guessed subject ....', guessedSubject)
+        else:
+            guessedSubject = 'NS'
+            # print("dans le else .... gessedSubject ", guessedSubject)
         entities['Subject'].append(guessedSubject)
+    print('TITLE   ', title, 'ENTITES   ', entities, '\n')
     # print(entities['Date'])
     cleanTitle = [titleWord for titleWord in titleTokens if titleWord.lower() not in fillers]
     return entities, cleanTitle
 
 
-dataFiles = os.listdir('../dataset/data')
+dataFiles = os.listdir('dataset/data')
 dataFiles.sort()
-#dataFiles = dataFiles[3800:3801]
+# dataFiles = dataFiles[3800:3801]
 
-captionFiles = os.listdir('../dataset/captions')
+captionFiles = os.listdir('dataset/captions')
 captionFiles.sort()
-#captionFiles = captionFiles[3800:3801]
+# captionFiles = captionFiles[3800:3801]
 
-titleFiles = os.listdir('../dataset/titles')
+titleFiles = os.listdir('dataset/titles')
 titleFiles.sort()
-#titleFiles = titleFiles[3800:3801]
+# titleFiles = titleFiles[3800:3801]
 
 # shuffle data
 # random.seed(10)
@@ -484,7 +490,6 @@ fillers = ['in', 'the', 'and', 'or', 'an', 'as', 'can', 'be', 'a', ':', '-',
 numbers = ['percent', 'percentage', '%', 'hundred', 'thousand', 'million', 'billion', 'trillion',
            'hundreds', 'thousands', 'millions', 'billions', 'trillions']
 
-
 positiveTrends = ['increased', 'increase', 'increasing', 'grew', 'growing', 'rose', 'rising', 'gained', 'gaining']
 negativeTrends = ['decreased', 'decrease', 'decreasing', 'shrank', 'shrinking', 'fell', 'falling', 'dropped',
                   'dropping']
@@ -493,12 +498,13 @@ simpleChartTypes = []
 complexChartTypes = []
 
 for m in range(len(dataFiles)):
-    dataPath = '../dataset/data/' + dataFiles[m]
-    captionPath = '../dataset/captions/' + captionFiles[m]
-    titlePath = '../dataset/titles/' + titleFiles[m]
+    dataPath = 'dataset/data/' + dataFiles[m]
+    captionPath = 'dataset/captions/' + captionFiles[m]
+    titlePath = 'dataset/titles/' + titleFiles[m]
     caption = openCaption(captionPath)
     title = openCaption(titlePath)
     df, cols, size, xAxis, yAxis, chartType = openData(dataPath)
+    print("titlePath....",titlePath)
     simpleChartTypes.append(chartType)
     cleanXAxis = cleanAxisLabel(xAxis)
     cleanYAxis = cleanAxisLabel(yAxis)
@@ -619,12 +625,12 @@ for m in range(len(dataFiles)):
                         if len(xCount) == 2 or len(yCount) == 2 or (len(xCount) == 1 and len(yCount) == 1):
                             values, indices = getTemplateValues(xCount, yCount, xValueArr, yValueArr)
                             if len(values) > 1:
-                                #print(token, tokenIdx)
-                                #print(sentence)
-                                #print(xValueArr)
-                                #print(yValueArr)
-                                #print(xCount, values)
-                                #print(scale)
+                                # print(token, tokenIdx)
+                                # print(sentence)
+                                # print(xValueArr)
+                                # print(yValueArr)
+                                # print(xCount, values)
+                                # print(scale)
                                 if scaleIndicator and (scale == 'percent' or scale == 'percentage'):
                                     valueDiff = abs((float(values[1]) - float(values[0]) / float(values[0])) * 100)
                                     rounded1 = abs(normal_round(valueDiff))
@@ -662,6 +668,7 @@ for m in range(len(dataFiles)):
         summaryLabelArr.append(summaryLabelLine)
         titleArr.append(title)
 
+
 def multiColumnTemplater(token, valueArr, words, arrayIndex, axis):
     if axisTypes[axis].lower() == 'ordinal' or axisTypes[axis].lower() == 'numerical':
         if is_number(token) and are_numbers(valueArr):
@@ -679,6 +686,7 @@ def multiColumnTemplater(token, valueArr, words, arrayIndex, axis):
 def adjustMultiColumnLabel(bool, index, axis):
     dataLabels[axis][index] = bool
 
+
 def openMultiColumnData(dataPath):
     df = pd.read_csv(dataPath)
     cols = df.columns
@@ -686,8 +694,8 @@ def openMultiColumnData(dataPath):
     chartType = getChartType(cols[0])
     return df, cols, size, chartType
 
-def compareMultiColumnToken(captionTokens, index, cleanTitle,
-                            colData, cleanCols, entities):
+
+def compareMultiColumnToken(captionTokens, index, cleanTitle, colData, cleanCols, entities):
     token = captionTokens[index].replace(',', '').lower()
     if is_word_number(token):
         token = str(text2num(token, 'en'))
@@ -762,6 +770,7 @@ def compareMultiColumnToken(captionTokens, index, cleanTitle,
                     return [1, f'templateTitle[{usIndex}]']
     return [0, token]
 
+
 def checkForParallelMultiColumn(axis, variant, arrayIndex):
     otherColumns = [column for column, index in zip(colData, range(len(colData))) if index != axis]
     print(otherColumns)
@@ -778,19 +787,19 @@ def checkForParallelMultiColumn(axis, variant, arrayIndex):
                 parallelData.append([template, axis, tokenIndex])
 
 
-dataFiles = os.listdir('../dataset/multiColumn/data')
+dataFiles = os.listdir('dataset/multiColumn/data')
 dataFiles.sort()
 
-captionFiles = os.listdir('../dataset/multiColumn/captions')
+captionFiles = os.listdir('dataset/multiColumn/captions')
 captionFiles.sort()
 
-titleFiles = os.listdir('../dataset/multiColumn/titles')
+titleFiles = os.listdir('dataset/multiColumn/titles')
 titleFiles.sort()
 
 for m in range(len(dataFiles)):
-    dataPath = '../dataset/multiColumn/data/' + dataFiles[m]
-    captionPath = '../dataset/multiColumn/captions/' + captionFiles[m]
-    titlePath = '../dataset/multiColumn/titles/' + titleFiles[m]
+    dataPath = 'dataset/multiColumn/data/' + dataFiles[m]
+    captionPath = 'dataset/multiColumn/captions/' + captionFiles[m]
+    titlePath = 'dataset/multiColumn/titles/' + titleFiles[m]
     caption = openCaption(captionPath)
     title = openCaption(titlePath)
     df, cols, size, chartType = openMultiColumnData(dataPath)
@@ -806,7 +815,7 @@ for m in range(len(dataFiles)):
     # iterate through each table row
     for m in range(0, size):
         axisTypes = []
-        #rowData = []
+        # rowData = []
         records = []
         dataLabels = []
         for axis, n in zip(cols, range(cols.size)):
@@ -816,7 +825,7 @@ for m in range(len(dataFiles)):
                 axisTypes.append('categorical')
             value = str(df.at[m, axis])
             cleanValue = cleanAxisValue(value)
-            #rowData.append(cleanValue)
+            # rowData.append(cleanValue)
             record = f"{cleanCols[n]}|{cleanValue}|{n}|{chartType}"
             dataLine += f'{record} '
             dataLabels.append([0 for item in range(size)])
@@ -843,7 +852,7 @@ for m in range(len(dataFiles)):
             tokenBool, newToken = compareMultiColumnToken(captionTokens, m, cleanTitle, colData,
                                                           cleanCols, entities)
             if tokenBool == 1:
-                #print(newToken)
+                # print(newToken)
                 captionTokens[m] = newToken
                 captionMatchCount += 1
         else:
@@ -941,7 +950,7 @@ for m in range(len(dataFiles)):
     captionRatio = round(captionMatchCount / len(captionTokens), 2)
     if captionMatchCount >= 1 and dataMatchCount >= 1:
         for col in colData:
-            assert labelCount/len(colData) == len(col)
+            assert labelCount / len(colData) == len(col)
         dataRatioArr.append(dataRatio)
         captionRatioArr.append(captionRatio)
         summaryLabelLine = (' ').join(labelMap)
@@ -955,14 +964,14 @@ for m in range(len(dataFiles)):
         summaryLabelArr.append(summaryLabelLine)
         titleArr.append(title)
 
-
 assert len(dataArr) == len(dataLabelArr)
 assert len(summaryArr) == len(summaryLabelArr)
 assert len(summaryArr) == len(oldSummaryArr)
 assert len(titleArr) == len(dataArr)
 
 # shuffle data with seed=0 for reproducibility
-dataArrShuffled, dataLabelArrShuffled, summaryArrShuffled, summaryLabelArrShuffled, oldSummaryArrShuffled, titleArrShuffled = utils.shuffle(dataArr, dataLabelArr, summaryArr, summaryLabelArr, oldSummaryArr, titleArr, random_state=0)
+dataArrShuffled, dataLabelArrShuffled, summaryArrShuffled, summaryLabelArrShuffled, oldSummaryArrShuffled, titleArrShuffled = utils.shuffle(
+    dataArr, dataLabelArr, summaryArr, summaryLabelArr, oldSummaryArr, titleArr, random_state=0)
 
 trainSize = round(len(dataArrShuffled) * 0.7)
 testSize = round(len(dataArrShuffled) * 0.15)
@@ -992,80 +1001,79 @@ oldTrainSummary = oldSummaryArrShuffled[0:trainSize]
 oldTestSummary = oldSummaryArrShuffled[trainSize:trainSize + testSize]
 oldValidSummary = oldSummaryArrShuffled[trainSize + testSize:]
 
-
-with open('../data/train/trainData.txt', mode='wt', encoding='utf8') as myfile0:
+with open('data/train/trainData.txt', mode='wt', encoding='utf8') as myfile0:
     myfile0.writelines("%s\n" % line for line in trainData)
-with open('../data/train/trainDataLabel.txt', mode='wt', encoding='utf8') as myfile1:
+with open('data/train/trainDataLabel.txt', mode='wt', encoding='utf8') as myfile1:
     myfile1.writelines("%s\n" % line for line in trainDataLabel)
 
-with open('../data/test/testData.txt', mode='wt', encoding='utf8') as myfile2:
+with open('data/test/testData.txt', mode='wt', encoding='utf8') as myfile2:
     myfile2.writelines("%s\n" % line for line in testData)
-with open('../data/test/testDataLabel.txt', mode='wt', encoding='utf8') as myfile3:
+with open('data/test/testDataLabel.txt', mode='wt', encoding='utf8') as myfile3:
     myfile3.writelines("%s\n" % line for line in testDataLabel)
 
-with open('../data/valid/validData.txt', mode='wt', encoding='utf8') as myfile4:
+with open('data/valid/validData.txt', mode='wt', encoding='utf8') as myfile4:
     myfile4.writelines("%s\n" % line for line in validData)
-with open('../data/valid/validDataLabel.txt', mode='wt', encoding='utf8') as myfile5:
+with open('data/valid/validDataLabel.txt', mode='wt', encoding='utf8') as myfile5:
     myfile5.writelines("%s\n" % line for line in validDataLabel)
 
-with open('../data/train/trainSummary.txt', mode='wt', encoding='utf8') as myfile6:
+with open('data/train/trainSummary.txt', mode='wt', encoding='utf8') as myfile6:
     myfile6.writelines("%s\n" % line for line in trainSummary)
-with open('../data/train/trainSummaryLabel.txt', mode='wt', encoding='utf8') as myfile7:
+with open('data/train/trainSummaryLabel.txt', mode='wt', encoding='utf8') as myfile7:
     myfile7.writelines("%s\n" % line for line in trainSummaryLabel)
 
-with open('../data/test/testSummary.txt', mode='wt', encoding='utf8') as myfile8:
+with open('data/test/testSummary.txt', mode='wt', encoding='utf8') as myfile8:
     myfile8.writelines("%s\n" % line for line in testSummary)
-with open('../data/test/testSummaryLabel.txt', mode='wt', encoding='utf8') as myfile9:
+with open('data/test/testSummaryLabel.txt', mode='wt', encoding='utf8') as myfile9:
     myfile9.writelines("%s\n" % line for line in testSummaryLabel)
 
-with open('../data/valid/validSummary.txt', mode='wt', encoding='utf8') as myfile10:
+with open('data/valid/validSummary.txt', mode='wt', encoding='utf8') as myfile10:
     myfile10.writelines("%s\n" % line for line in validSummary)
-with open('../data/valid/validSummaryLabel.txt', mode='wt', encoding='utf8') as myfile11:
+with open('data/valid/validSummaryLabel.txt', mode='wt', encoding='utf8') as myfile11:
     myfile11.writelines("%s\n" % line for line in validSummaryLabel)
 
-with open('../data/dataRatio.txt', mode='wt', encoding='utf8') as myfile12:
+with open('data/dataRatio.txt', mode='wt', encoding='utf8') as myfile12:
     myfile12.write(str(dataRatioArr))
-with open('../data/captionRatio.txt', mode='wt', encoding='utf8') as myfile13:
+with open('data/captionRatio.txt', mode='wt', encoding='utf8') as myfile13:
     myfile13.write(str(captionRatioArr))
 
-with open('../data/train/trainTitle.txt', mode='wt', encoding='utf8') as myfile14:
+with open('data/train/trainTitle.txt', mode='wt', encoding='utf8') as myfile14:
     myfile14.writelines("%s" % line for line in trainTitle)
-with open('../data/test/testTitle.txt', mode='wt', encoding='utf8') as myfile15:
+with open('data/test/testTitle.txt', mode='wt', encoding='utf8') as myfile15:
     myfile15.writelines("%s" % line for line in testTitle)
-with open('../data/valid/validTitle.txt', mode='wt', encoding='utf8') as myfile16:
+with open('data/valid/validTitle.txt', mode='wt', encoding='utf8') as myfile16:
     myfile16.writelines("%s" % line for line in validTitle)
 
-with open('../data/train/trainOriginalSummary.txt', mode='wt', encoding='utf8') as myfile17:
+with open('data/train/trainOriginalSummary.txt', mode='wt', encoding='utf8') as myfile17:
     myfile17.writelines("%s" % line for line in oldTrainSummary)
-with open('../data/test/testOriginalSummary.txt', mode='wt', encoding='utf8') as myfile18:
+with open('data/test/testOriginalSummary.txt', mode='wt', encoding='utf8') as myfile18:
     myfile18.writelines("%s" % line for line in oldTestSummary)
-with open('../data/valid/validOriginalSummary.txt', mode='wt', encoding='utf8') as myfile19:
+with open('data/valid/validOriginalSummary.txt', mode='wt', encoding='utf8') as myfile19:
     myfile19.writelines("%s" % line for line in oldValidSummary)
 
-with open('../data/chartCounts.txt', mode='wt', encoding='utf8') as myfile20:
+with open('data/chartCounts.txt', mode='wt', encoding='utf8') as myfile20:
     simple = collections.Counter(simpleChartTypes).items()
     complex = collections.Counter(complexChartTypes).items()
     myfile20.write(f"{[f'{key}: {val}' for key, val in simple]}\n")
     myfile20.write(f"{[f'{key}: {val}' for key, val in complex]}")
 
-with open('../data/summaryList.txt', mode='wt', encoding='utf8') as myfile21:
+with open('data/summaryList.txt', mode='wt', encoding='utf8') as myfile21:
     myfile21.writelines("%s" % line for line in oldSummaryArr)
-with open('../data/titleList.txt', mode='wt', encoding='utf8') as myfile22:
+with open('data/titleList.txt', mode='wt', encoding='utf8') as myfile22:
     myfile22.writelines("%s" % line for line in titleArr)
 
 import matplotlib.pyplot as plt
 
 plt.hist(dataRatioArr, 6)
-plt.savefig('../data/data.png')
+plt.savefig('data/data.png')
 plt.close('all')
 plt.hist(captionRatioArr, 6)
-plt.savefig('../data/caption.png')
+plt.savefig('data/caption.png')
 plt.close('all')
 """
-with open('../data/fineTune/data.txt', mode='wt', encoding='utf8') as myfile14, \
-        open('../data/fineTune/dataLabel.txt', mode='wt', encoding='utf8') as myfile15, \
-        open('../data/fineTune/summary.txt', mode='wt', encoding='utf8') as myfile16, \
-        open('../data/fineTune/summaryLabel.txt', mode='wt', encoding='utf8') as myfile17:
+with open('data/fineTune/data.txt', mode='wt', encoding='utf8') as myfile14, \
+        open('data/fineTune/dataLabel.txt', mode='wt', encoding='utf8') as myfile15, \
+        open('data/fineTune/summary.txt', mode='wt', encoding='utf8') as myfile16, \
+        open('data/fineTune/summaryLabel.txt', mode='wt', encoding='utf8') as myfile17:
     for i in range(0, len(captionRatioArr)):
         if captionRatioArr[i] > 0.35:
             myfile14.writelines(dataArr[i] + "\n")
