@@ -434,15 +434,15 @@ def getSubject(titleTokens, nerEntities):
         if len(uppercaseWords) > 1:
             guessedSubject = ' '.join(uppercaseWords[1:])
             # print('ligne 436 dans le if......guessedSubject', guessedSubject)
-        elif len(uppercaseWords) == 1:
+        else: # len(uppercaseWords) == 1:
             # print('ligne 439 dans le elif....before guessed subject ....', uppercaseWords)
             guessedSubject = uppercaseWords[0]
             # print('ligne 441 dans le else....after guessed subject ....', guessedSubject)
-        else:
+        """else:
             guessedSubject = 'NS'
-            # print("dans le else .... gessedSubject ", guessedSubject)
+            # print("dans le else .... gessedSubject ", guessedSubject)"""
         entities['Subject'].append(guessedSubject)
-    print('TITLE   ', title, 'ENTITES   ', entities, '\n')
+    # print('TITLE   ', title, 'ENTITES   ', entities, '\n')
     # print(entities['Date'])
     cleanTitle = [titleWord for titleWord in titleTokens if titleWord.lower() not in fillers]
     return entities, cleanTitle
@@ -504,7 +504,7 @@ for m in range(len(dataFiles)):
     caption = openCaption(captionPath)
     title = openCaption(titlePath)
     df, cols, size, xAxis, yAxis, chartType = openData(dataPath)
-    print("titlePath....",titlePath)
+    print("titlePath....", titlePath)
     simpleChartTypes.append(chartType)
     cleanXAxis = cleanAxisLabel(xAxis)
     cleanYAxis = cleanAxisLabel(yAxis)

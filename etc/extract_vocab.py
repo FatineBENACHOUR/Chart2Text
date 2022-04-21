@@ -22,9 +22,10 @@ if __name__ == '__main__':
         for line in open(args.table, 'r'):
             items = line.strip().split()
             for item in items:
-                print(item)
+                print('item   ', item)
                 elements = item.split('|')
-                print(elements)
+                print('elements  ', elements)
+                print("len elements         ",  len(elements))
                 assert len(elements) == 4
                 for element in elements:
                     if element not in table_vocab:
