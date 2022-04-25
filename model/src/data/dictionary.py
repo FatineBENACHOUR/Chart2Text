@@ -315,6 +315,8 @@ class Dictionary(object):
         if bin_path is not None and os.path.isfile(bin_path):
             print("Loading dataOld from %s ..." % bin_path)
             data = torch.load(bin_path)
+            print("****data  ", data)
+            print("****data_dico  ", data['dico'])
             assert dico == data['dico']
             print("%s checked. Nothing is done." % bin_path)
             return data

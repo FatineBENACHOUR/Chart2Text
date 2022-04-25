@@ -1,60 +1,60 @@
 the	19543
-.	14553
+.	14552
 of	12200
 ,	12199
 in	11259
-templateTitleSubject[0]	7901
+templateTitleSubject[0]	7896
 to	6644
-templateScale	6101
-templateYLabel[1]	6051
+templateScale	6100
+templateYLabel[1]	6055
 templateYLabel[0]	6032
-templateTitle[1]	4479
+templateTitle[1]	4466
 and	4299
-templateTitle[2]	4023
+templateTitle[2]	4034
 statistic	3628
-templateTitle[3]	3509
+templateTitle[3]	3517
 a	3468
-templateTitle[0]	3305
+templateTitle[0]	3353
 templateYLabel[2]	3297
 In	3275
 This	3249
 from	3212
 The	3159
 templateXValue[max]	2962
+templateTitle[4]	2663
 shows	2646
-templateTitle[4]	2645
 templateXValue[0]	2587
 templateYLabel[3]	2303
 was	2261
 templateXLabel[0]	2123
 templateTitleDate[0]	2025
 is	1993
-templateYValue[max]	1928
-templateTitle[5]	1893
+templateYValue[max]	1927
+templateTitle[5]	1910
 with	1849
 templateXValue[min]	1848
 as	1386
 that	1374
 templateValue[0][0]	1308
 for	1300
-'s	1287
+'s	1288
+templateTitle[6]	1283
 were	1276
 (	1262
 )	1261
-templateTitle[6]	1255
 templateXValue[1]	1226
 on	1197
 at	1104
 templateYLabel[4]	1099
 by	1002
-templateYValue[idxmax(X)]	897
+templateYValue[idxmax(X)]	896
 an	873
 templatePositiveTrend	843
 amounted	785
 had	781
+templateTitle[7]	681
 around	681
 are	672
-templateTitle[7]	671
 approximately	667
 about	662
 total	660
@@ -67,10 +67,9 @@ templateXValue[6]	613
 templateTitleDate[max]	608
 country	607
 templateXValue[last]	559
-templateTitleSubject[1]	556
 up	555
+templateYValue[0]	552
 depicts	549
-templateYValue[0]	548
 year	523
 templateValue[0][last]	521
 years	511
@@ -83,8 +82,9 @@ or	468
 it	462
 between	455
 this	443
-templateYValue[min]	438
-templateXLabel[1]	430
+templateYValue[min]	437
+templateXLabel[1]	429
+templateTitleSubject[1]	425
 dollars	420
 As	420
 highest	417
@@ -95,26 +95,26 @@ graph	394
 average	389
 more	386
 thousand	382
+worldwide	379
 2019	378
-worldwide	376
 templateTitleDate[min]	373
 all	366
 there	365
 one	363
 its	357
+templateTitle[8]	356
 templateValue[1][0]	356
 their	356
-templateTitle[8]	351
 until	348
 largest	343
 U.S.	333
 be	333
 templateLabel[0][0]	323
 templateNegativeTrend	320
-templateXValue[3]	319
 presents	319
 have	319
 world	318
+templateXValue[3]	318
 second	310
 season	310
 first	306
@@ -140,8 +140,8 @@ who	243
 templateXValue[5]	243
 templateValue[0][1]	242
 templateXValue[idxmax(Y)]	237
+market	236
 templateYValue[6]	236
-market	235
 reported	227
 pounds	226
 templateLabel[1][1]	225
@@ -170,10 +170,10 @@ some	192
 when	192
 expected	190
 during	189
-reached	182
+reached	183
 compared	181
 users	180
-'	180
+'	179
 templateLabel[3][0]	178
 National	178
 used	177
@@ -187,7 +187,7 @@ ranking	167
 amount	165
 third	164
 economic	163
-templateTitle[9]	159
+templateTitle[9]	161
 annual	157
 additional	154
 games	152
@@ -326,18 +326,18 @@ after	81
 comparison	81
 100,000	81
 templateValue[1][last]	80
-templateLabel[2][1]	79
 majority	79
 would	78
 templateXValue[10]	78
 templateXValue[9]	78
+templateLabel[2][1]	78
 20	78
 employees	78
 grow	78
 well	78
+game	77
 groups	77
 least	77
-game	76
 lived	76
 above	76
 seen	76
@@ -414,6 +414,7 @@ month	57
 common	57
 templateValue[1][1]	57
 templateLabel[1][2]	57
+index	57
 far	57
 where	57
 volume	57
@@ -423,7 +424,6 @@ inhabitants	56
 America	56
 broken	56
 Basketball	56
-index	56
 strength	56
 metric	56
 peak	56
@@ -452,6 +452,7 @@ state	52
 equal	52
 valued	52
 forecasted	52
+players	52
 months	51
 household	51
 significant	51
@@ -459,7 +460,6 @@ change	51
 templateLabel[0][1]	51
 these	51
 While	51
-players	51
 Over	51
 includes	50
 report	50
@@ -469,7 +469,6 @@ ranks	50
 region	50
 templateValue[2][last]	50
 templateValue[0][5]	50
-oil	50
 much	49
 rates	49
 China	49
@@ -479,6 +478,7 @@ What	49
 templateYLabel[6]	49
 spending	49
 below	49
+oil	49
 become	48
 headquartered	48
 steadily	48
@@ -520,6 +520,7 @@ earned	44
 30	44
 production	44
 ‘	44
+members	43
 denotes	43
 type	43
 here	43
@@ -531,7 +532,6 @@ numbers	43
 available	43
 current	43
 templateXValue[12]	42
-members	42
 system	42
 main	42
 apps	42
@@ -593,7 +593,6 @@ templateXValue[15]	36
 predicted	36
 area	36
 no	36
-football	36
 basis	36
 club	36
 own	36
@@ -617,6 +616,7 @@ earlier	35
 templateLabel[3][1]	35
 regarding	34
 templateValue[1][min]	34
+football	34
 templateValue[1][max]	34
 29	34
 result	34
@@ -639,6 +639,7 @@ annually	33
 player	32
 templateValue[2][1]	32
 national	32
+Cup	32
 40	32
 represented	32
 templateXValue[17]	32
@@ -685,7 +686,6 @@ costs	29
 penetration	29
 On	29
 templateLabel[5][0]	29
-templateTitleSubject[2]	29
 born	29
 •	29
 Overall	29
@@ -699,7 +699,6 @@ general	28
 statistics	28
 related	28
 vehicle	28
-Cup	28
 segments	28
 types	28
 World	28
@@ -727,6 +726,7 @@ cases	27
 another	27
 consumption	27
 When	27
+all-time	27
 expenditure	27
 car	27
 valuable	27
@@ -749,6 +749,7 @@ workers	26
 capital	26
 Despite	26
 pharmaceutical	26
+life	26
 templateYValue[9]	26
 coming	25
 revealed	25
@@ -780,7 +781,6 @@ fluctuated	25
 Although	25
 firm	25
 workforce	25
-life	25
 firms	25
 show	25
 Asia	24
@@ -823,7 +823,6 @@ sports	23
 set	23
 manufacturing	23
 male	23
-all-time	23
 find	23
 base	23
 combined	23
@@ -856,7 +855,6 @@ peaking	22
 family	22
 various	22
 Approximately	22
-clubs	22
 does	22
 final	22
 Domestic	21
@@ -881,6 +879,7 @@ beginning	21
 values	21
 success	21
 carried	21
+clubs	21
 pay	21
 technology	21
 purchased	21
@@ -970,7 +969,6 @@ females	18
 passenger	18
 fact	18
 States	18
-Index	18
 motor	18
 closely	18
 2005	18
@@ -1005,7 +1003,6 @@ medium	17
 league	17
 light	17
 individual	17
-restaurants	17
 official	17
 write	17
 days	17
@@ -1018,6 +1015,8 @@ playing	17
 activity	17
 17	17
 school	17
+templateTitleSubject[2]	17
+Index	17
 templateYLabel[7]	17
 60	17
 provider	17
@@ -1197,6 +1196,7 @@ audiences	13
 why	13
 sites	13
 U.S	13
+restaurants	13
 seems	13
 2017/18	13
 directly	13
@@ -1266,6 +1266,7 @@ populations	12
 start	12
 produces	12
 dominated	12
+soccer	12
 along	12
 books	12
 field	12
@@ -1331,12 +1332,10 @@ changed	11
 fall	11
 videos	11
 facts	11
-soccer	11
 Why	11
 free	11
 industries	11
 enterprises	11
-basketball	11
 position	11
 presence	11
 emerging	11
@@ -1411,7 +1410,6 @@ surplus	11
 templateYValue[13]	11
 attack	11
 computing	10
-subscription	10
 he	10
 2004	10
 go	10
@@ -1420,6 +1418,7 @@ art	10
 study	10
 Premier	10
 templateYValue[15]	10
+basketball	10
 electric	10
 sport	10
 39	10
@@ -1536,7 +1535,6 @@ mainly	9
 referendum	9
 chains	9
 totaling	9
-Store	9
 wages	9
 Middle	9
 drink	9
@@ -1577,7 +1575,6 @@ alcoholic	9
 beverages	9
 expenses	9
 Swiss	9
-crude	9
 displayed	9
 transactions	9
 Super	9
@@ -1645,6 +1642,7 @@ never	9
 core	9
 eggs	9
 grocery	8
+subscription	8
 operator	8
 wide	8
 spread	8
@@ -1683,6 +1681,7 @@ fees	8
 upcoming	8
 If	8
 independent	8
+Store	8
 President	8
 might	8
 offering	8
@@ -1713,6 +1712,7 @@ templateValue[2][4]	8
 course	8
 corporate	8
 addition	8
+crude	8
 thermal	8
 Western	8
 taxicabs	8
@@ -1856,7 +1856,6 @@ tech	7
 newly	7
 banking	7
 Institute	7
-Economic	7
 Sports	7
 athletes	7
 felt	7
@@ -1903,7 +1902,6 @@ late	7
 spends	7
 reality	7
 abroad	7
-I	7
 2001	7
 templateXValue[22]	7
 VR	7
@@ -1954,7 +1952,6 @@ arrivals	7
 carrier	7
 Online	7
 Consumer	7
-FC	7
 2002	7
 templateValue[4][last]	7
 templateValue[5][last]	7
@@ -2003,7 +2000,6 @@ templateValue[2][7]	7
 subscriptions	6
 Services	6
 Mexican	6
-subscribers	6
 chemical	6
 smoke	6
 give	6
@@ -2119,6 +2115,7 @@ liked	6
 ones	6
 culture	6
 historical-cost	6
+I	6
 Center	6
 Washington	6
 married	6
@@ -2139,6 +2136,7 @@ photovoltaic	6
 frequently	6
 obtained	6
 picture	6
+Intermediate	6
 analysis	6
 confirmed	6
 policy	6
@@ -2185,6 +2183,7 @@ design	6
 tennis	6
 Warriors	6
 adjusting	6
+FC	6
 2000s	6
 consisted	6
 written	6
@@ -2236,13 +2235,13 @@ relations	6
 1982	6
 Pounds	6
 templateValue[0][19]	6
-Rays	6
 orders	6
 calculations	6
 grossing	6
 cloud	5
 trailing	5
 templateXValue[49]	5
+subscribers	5
 diversified	5
 coverage	5
 south	5
@@ -2315,6 +2314,7 @@ premium	5
 Industrial	5
 trip	5
 Packers	5
+Economic	5
 sportswear	5
 driver	5
 require	5
@@ -2345,7 +2345,6 @@ surge	5
 controlled	5
 constitutes	5
 Chiefs	5
-Thunder	5
 fastest	5
 White	5
 mentioned	5
@@ -2504,7 +2503,6 @@ modern	5
 fluctuating	5
 rivals	5
 laws	5
-Business	5
 eighth	5
 metals	5
 jewelry	5
@@ -2597,6 +2595,7 @@ Companies	5
 finished	5
 templateLabel[2][3]	5
 seeking	5
+Rays	5
 educational	5
 marriages	5
 losses	5
@@ -2943,6 +2942,7 @@ bicycles	4
 arrested	4
 Clippers	4
 views	4
+Business	4
 Nevertheless	4
 CEO	4
 1960	4
@@ -2974,7 +2974,6 @@ mortality	4
 hovered	4
 finding	4
 severely	4
-Blazers	4
 transition	4
 elements	4
 drastic	4
@@ -3037,6 +3036,7 @@ Each	4
 PLC	4
 emitted	4
 initiated	4
+Thunder	4
 tradition	4
 Club	4
 consequences	4
@@ -3211,7 +3211,6 @@ wheels	3
 3.5	3
 retired	3
 travelling	3
-Society	3
 priced	3
 Technologies	3
 Agricultural	3
@@ -3404,6 +3403,7 @@ territories	3
 WTI	3
 savings	3
 69	3
+Kings	3
 secured	3
 wealthiest	3
 Key	3
@@ -4078,6 +4078,7 @@ gases	2
 evenly	2
 1.57	2
 extended	2
+Climate	2
 Australians	2
 Hawaii	2
 ban	2
@@ -4389,7 +4390,6 @@ restructuring	2
 kids	2
 diversity	2
 concentrated	2
-monument	2
 Hurricane	2
 Sandy	2
 granted	2
@@ -4434,7 +4434,6 @@ oven	2
 lesser	2
 Red	2
 cold	2
-N	2
 tours	2
 423	2
 Birmingham	2
@@ -5279,7 +5278,6 @@ Journal	2
 Sexual	2
 PS4	2
 expand	2
-Kings	2
 marketed	2
 controlling	2
 Foreign	2
@@ -5416,7 +5414,6 @@ holidays	2
 Singaporean	2
 motherhood	2
 traditionally	2
-Intermediate	2
 indicative	2
 cigarette	2
 payroll	2
@@ -5506,6 +5503,7 @@ Applebee	2
 fake	2
 templateXValue[32]	2
 inmates	2
+Mechanism	2
 feminists	2
 feminism	2
 But	2
@@ -6362,6 +6360,7 @@ Wealth	1
 unevenly	1
 286	1
 Genting	1
+Citroën	1
 51.89	1
 47.63	1
 Brad	1
@@ -6544,6 +6543,7 @@ Iconic	1
 Visitation	1
 closure	1
 treasure	1
+monument	1
 slumped	1
 sinking	1
 Such	1
@@ -6610,6 +6610,7 @@ happy	1
 47,800	1
 Beyonce	1
 Guns	1
+'N	1
 169.4	1
 130.8	1
 equipped	1
@@ -7201,6 +7202,7 @@ follows	1
 Bitcoins	1
 second-place	1
 Street	1
+Blazers	1
 nurse	1
 72,000	1
 yttrium-oxide	1
@@ -7289,7 +7291,7 @@ Mac	1
 Economist	1
 231,163	1
 happen	1
-templateDelta[5,4]	1
+templateDelta[4,5]	1
 387	1
 consumtion	1
 calories	1
@@ -7720,7 +7722,7 @@ disabilities	1
 10.43	1
 shoe	1
 kids/teenagers	1
-templateDelta[5,9]	1
+templateDelta[9,5]	1
 worsened	1
 value-per-deal	1
 76ers	1
@@ -8620,6 +8622,7 @@ Fitness	1
 'Thriller	1
 'Hotel	1
 world-famous	1
+N	1
 hugely	1
 seamlessly	1
 three-quarters	1
@@ -8843,7 +8846,7 @@ desert	1
 887,800	1
 visualises	1
 'ageing	1
-templateDelta[1,2]	1
+templateDelta[2,1]	1
 Colombians	1
 2005.Moreover	1
 incidence	1
@@ -9083,6 +9086,7 @@ Victoria	1
 Under	1
 755	1
 mid-year	1
+contest	1
 1956	1
 contesting	1
 hopes	1
@@ -10447,6 +10451,7 @@ Francs	1
 15.9	1
 institutes	1
 mortgages	1
+Society	1
 6,859	1
 Watson	1
 P.L.C	1
@@ -11130,6 +11135,7 @@ satellite	1
 2040	1
 Technical	1
 2.302	1
+Optimism	1
 addressing	1
 Plans	1
 outlays	1

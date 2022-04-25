@@ -309,7 +309,7 @@ def templateAssigner(token, valueArr, words, arrayIndex, axis):
     return [1, f'template{axis}Value[{arrayIndex}]']
 
 
-def compareToken(captionTokens, index, cleanTitle, xValueArr,yValueArr, cleanXAxis, cleanYAxis, entities):
+def compareToken(captionTokens, index, cleanTitle, xValueArr, yValueArr, cleanXAxis, cleanYAxis, entities):
     token = captionTokens[index].replace(',', '').lower()
     if is_word_number(token):
         token = str(text2num(token, 'en'))
@@ -404,7 +404,7 @@ def compareToken(captionTokens, index, cleanTitle, xValueArr,yValueArr, cleanXAx
 def getSubject(titleTokens, nerEntities):
     entities = {'Subject': [], 'Date': []}
     # manually find dates, it performs better than using NER
-    print("titleTokens ......", titleTokens)
+    print("titleTokens .......", titleTokens)
     for word in titleTokens:
         if word.isnumeric():
             if len(word) > 3:
@@ -431,18 +431,19 @@ def getSubject(titleTokens, nerEntities):
     # guess subject if NER doesn't find one
     if len(entities['Subject']) == 0:
         uppercaseWords = [word for word in titleTokens if word[0].isupper()]
+        print("uppercaseWords......",uppercaseWords)
         if len(uppercaseWords) > 1:
             guessedSubject = ' '.join(uppercaseWords[1:])
-            # print('ligne 436 dans le if......guessedSubject', guessedSubject)
-        else: # len(uppercaseWords) == 1:
-            # print('ligne 439 dans le elif....before guessed subject ....', uppercaseWords)
+            print('ligne 436 dans le if......guessedSubject', guessedSubject)
+        elif len(uppercaseWords) == 1:
             guessedSubject = uppercaseWords[0]
-            # print('ligne 441 dans le else....after guessed subject ....', guessedSubject)
-        """else:
-            guessedSubject = 'NS'
-            # print("dans le else .... gessedSubject ", guessedSubject)"""
+            print('ligne 441 dans le else....after guessed subject ....', guessedSubject)
+        else:
+            print('dans le else : len(uppercaseWords) == 0 ie none uppercasedword' )
+            guessedSubject = titleTokens[0]
+            print("dans le else .... gessedSubject ", guessedSubject)
         entities['Subject'].append(guessedSubject)
-    # print('TITLE   ', title, 'ENTITES   ', entities, '\n')
+    print('TITLE   ', title, 'ENTITES   ', entities, '\n')
     # print(entities['Date'])
     cleanTitle = [titleWord for titleWord in titleTokens if titleWord.lower() not in fillers]
     return entities, cleanTitle
@@ -538,9 +539,9 @@ for m in range(len(dataFiles)):
 
     captionSentences = caption.split(' . ')
     if len(captionSentences) >= 4:
-        trimmedCaption = (' . ').join(captionSentences[0:3]) + ' .\n'
+        trimmedCaption = ' . '.join(captionSentences[0:3]) + ' .\n'
     else:
-        trimmedCaption = (' . ').join(captionSentences)
+        trimmedCaption = ' . '.join(captionSentences)
     captionTokens = trimmedCaption.split()
 
     xDataLabels = [0 for item in range(0, len(xValueArr))]
@@ -614,7 +615,8 @@ for m in range(len(dataFiles)):
             elif token.lower() in negativeTrends:
                 token = 'templateNegativeTrend'
                 trendIndicator = True
-            # if there is an unlabelled numeric token in a sentence containing a trend word, assume that token is a delta between two values
+            # if there is an unlabelled numeric token in a sentence containing a trend word, assume that token
+            # is a delta between two values
             if trendIndicator:
                 if token not in years:
                     if is_number(token):
@@ -648,7 +650,7 @@ for m in range(len(dataFiles)):
         newSentences.append(' '.join(newSentence))
     assert len(captionTokens) == len(labelMap)
     dataRowPairs = [f'{xLabel} {yLabel}' for xLabel, yLabel in zip(xDataLabels, yDataLabels)]
-    dataLabelLine = (' ').join(dataRowPairs)
+    dataLabelLine = ' '.join(dataRowPairs)
     assert len(dataLabelLine.split()) == (len(xValueArr) + len(yValueArr))
     dataMatchCount = sum(xDataLabels) + sum(yDataLabels)
     dataRatio = round(dataMatchCount / (len(xValueArr) + len(yValueArr)), 2)
@@ -657,9 +659,9 @@ for m in range(len(dataFiles)):
         assert len(xValueArr) == len(yValueArr)
         dataRatioArr.append(dataRatio)
         captionRatioArr.append(captionRatio)
-        summaryLabelLine = (' ').join(labelMap)
+        summaryLabelLine = ' '.join(labelMap)
         assert len(captionTokens) == len(summaryLabelLine.split())
-        newCaption = (' . ').join(newSentences)
+        newCaption = ' . '.join(newSentences)
         oldSummaryArr.append(trimmedCaption)
         labelList.append(labelMap)
         dataArr.append(dataLine)
@@ -831,9 +833,9 @@ for m in range(len(dataFiles)):
             dataLabels.append([0 for item in range(size)])
     captionSentences = caption.split(' . ')
     if len(captionSentences) >= 4:
-        trimmedCaption = (' . ').join(captionSentences[0:3]) + ' .\n'
+        trimmedCaption = ' . '.join(captionSentences[0:3]) + ' .\n'
     else:
-        trimmedCaption = (' . ').join(captionSentences)
+        trimmedCaption = ' . '.join(captionSentences)
     captionTokens = trimmedCaption.split()
 
     labelMap = []
@@ -942,7 +944,7 @@ for m in range(len(dataFiles)):
             newSentence.append(token)
         newSentences.append(' '.join(newSentence))
     assert len(captionTokens) == len(labelMap)
-    dataLabelLine = (' ').join([' '.join([str(item) for item in column]) for column in dataLabels])
+    dataLabelLine = ' '.join([' '.join([str(item) for item in column]) for column in dataLabels])
     labelCount = sum([len(column) for column in dataLabels])
     assert len(dataLabelLine.split()) == labelCount
     dataMatchCount = sum([sum(column) for column in dataLabels])
@@ -953,9 +955,9 @@ for m in range(len(dataFiles)):
             assert labelCount / len(colData) == len(col)
         dataRatioArr.append(dataRatio)
         captionRatioArr.append(captionRatio)
-        summaryLabelLine = (' ').join(labelMap)
+        summaryLabelLine = ' '.join(labelMap)
         assert len(captionTokens) == len(summaryLabelLine.split())
-        newCaption = (' . ').join(newSentences)
+        newCaption = ' . '.join(newSentences)
         oldSummaryArr.append(trimmedCaption)
         labelList.append(labelMap)
         dataArr.append(dataLine)

@@ -8,14 +8,16 @@ from fitbert.fitb import FitBert
 """
 summaryComparison.py: Run this on the generated summaries to substitute the data variables with the actual data
 """
+
+
 def askBert(masked_string, options):
     ranked_options = fb.rank(masked_string, options)
-    #print(ranked_options)
+    # print(ranked_options)
     return ranked_options[0]
 
 
 def getScale(title, xLabel, yLabel):
-    #add Share
+    # add Share
     for xLabelToken in xLabel:
         xLabelWord = xLabelToken.replace('_', ' ').lower()
         if xLabelWord in scales:
@@ -79,8 +81,9 @@ def are_numbers(stringList):
     except ValueError:
         return False
 
-#valueArr is the array of the idxmax/min (x or y)
-#type is min/max
+
+# valueArr is the array of the idxmax/min (x or y)
+# type is min/max
 def mapParallelIndex(valueArr, type):
     if are_numbers(valueArr):
         try:
@@ -108,6 +111,7 @@ def mapParallelIndex(valueArr, type):
             print('Parallel num err')
             print(valueArr, type)
             return 0
+
 
 def mapIndex(index, array):
     if are_numbers(array):
@@ -163,21 +167,21 @@ def replaceTrends(reverse):
             index = tokens.index('templatePositiveTrend')
             tokens[index] = '***mask***'
             replacedToken = askBert(' '.join(tokens), positiveTrends)
-            sentenceTemplates[index] = {'templatePositiveTrend' : replacedToken}
+            sentenceTemplates[index] = {'templatePositiveTrend': replacedToken}
             tokens[index] = replacedToken
     if 'templateNegativeTrend' in tokens:
         while 'templateNegativeTrend' in tokens:
             index = tokens.index('templateNegativeTrend')
             tokens[index] = '***mask***'
             replacedToken = askBert(' '.join(tokens), negativeTrends)
-            sentenceTemplates[index] = {'templateNegativeTrend':replacedToken}
+            sentenceTemplates[index] = {'templateNegativeTrend': replacedToken}
             tokens[index] = replacedToken
     if 'scaleError' in tokens:
         while 'scaleError' in tokens:
             index = tokens.index('scaleError')
             tokens[index] = '***mask***'
             replacedToken = askBert(' '.join(tokens), scales)
-            sentenceTemplates[index] = {'templateScale':replacedToken}
+            sentenceTemplates[index] = {'templateScale': replacedToken}
             tokens[index] = replacedToken
     newReverse = ' '.join(tokens)
     if newReverse[-2:] == '. ':
@@ -227,6 +231,7 @@ def getMultiColumnNamedEntity(title, valueArr, labelArr):
                 p = 0
     return entities
 
+
 def getMultiColumnScale(title, labels):
     for label in labels:
         for labelToken in label.split(' '):
@@ -237,6 +242,7 @@ def getMultiColumnScale(title, labels):
             if titleToken in scales:
                 return titleToken
     return 'scaleError'
+
 
 goldPath = '../data/test/testOriginalSummary.txt'
 goldTemplatePath = '../data/test/testSummary.txt'
@@ -253,9 +259,9 @@ newDataPath = '../results/aug17/data'
 nlp = spacy.load('en_core_web_md')
 fb = FitBert()
 
-#def main():
+# def main():
 scales = ['percent', 'percentage', '%', 'hundred', 'thousand', 'million', 'billion', 'trillion',
-              'hundreds', 'thousands', 'millions', 'billions', 'trillions']
+          'hundreds', 'thousands', 'millions', 'billions', 'trillions']
 positiveTrends = ['increased', 'increase', 'increasing', 'grew', 'growing', 'rose', 'rising', 'gained', 'gaining']
 negativeTrends = ['decreased', 'decrease', 'decreasing', 'shrank', 'shrinking', 'fell', 'falling', 'dropped',
                   'dropping']
@@ -267,9 +273,11 @@ count = 0
 lineCount = 0
 
 with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r', encoding='utf-8') as generatedFile \
-    , open(dataPath, 'r', encoding='utf-8') as dataFile, open(outputPath, 'w', encoding='utf-8') as outputFile, \
-    open(titlePath, 'r', encoding='utf-8') as titleFile, open(goldTemplatePath, 'r', encoding='utf-8') as goldTemplateFile, \
-    open(comparisonPath, 'w', encoding='utf-8') as comparisonFile, open(analysisPath, 'w', encoding='utf-8') as analysisFile:
+        , open(dataPath, 'r', encoding='utf-8') as dataFile, open(outputPath, 'w', encoding='utf-8') as outputFile, \
+        open(titlePath, 'r', encoding='utf-8') as titleFile, open(goldTemplatePath, 'r',
+                                                                  encoding='utf-8') as goldTemplateFile, \
+        open(comparisonPath, 'w', encoding='utf-8') as comparisonFile, open(analysisPath, 'w',
+                                                                            encoding='utf-8') as analysisFile:
     fileIterators = zip(goldFile.readlines(), goldTemplateFile.readlines(),
                         generatedFile.readlines(), dataFile.readlines(), titleFile.readlines())
     templates = []
@@ -277,7 +285,7 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
         templateList = []
         count += 1
         datum = data.split()
-        #check if data is multi column
+        # check if data is multi column
         columnType = datum[0].split('|')[2].isnumeric()
         if columnType:
             labelArr = []
@@ -286,14 +294,14 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
             values = [value.split('|')[1] for value in datum]
             # find number of columns:
             columnCount = max([int(data.split('|')[2]) for data in datum]) + 1
-            #Get labels
+            # Get labels
             for i in range(columnCount):
                 label = datum[i].split('|')[0].split('_')
                 cleanLabel = [word for word in label if word.lower() not in fillers]
                 labelArr.append(label)
                 cleanLabelArr.append(cleanLabel)
             stringLabels = [' '.join(label) for label in labelArr]
-            #Get values
+            # Get values
             valueArr = [[] for i in range(columnCount)]
             cleanValArr = [[] for i in range(columnCount)]
             rowCount = round(len(datum) / columnCount)
@@ -301,7 +309,7 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
             for n in range(rowCount):
                 for m in range(columnCount):
                     value = values[i]
-                    #print(f'col {n} row {m}: {value}')
+                    # print(f'col {n} row {m}: {value}')
                     cleanVal = datum[i].split('|')[1].replace('_', ' ')
                     valueArr[m].append(value)
                     cleanValArr[m].append(cleanVal)
@@ -323,7 +331,7 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                     if 'template' in token and 'Trend' not in token:
                         rowLength = len(valueArr[0]) - 1
                         templateAxis = None
-                        #columnIndex = int(token[14:15])
+                        # columnIndex = int(token[14:15])
                         if 'idxmax' in token or 'idxmin' in token:
                             if 'max' in token:
                                 idxType = 'max'
@@ -422,7 +430,7 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
             reverse = ' '.join(reversedSentences)
             # replace trend words after all templates inserted for better accuracy
             printable = pd.DataFrame(index=stringLabels, data=valueArr)
-            #printable = "\n".join([' '.join(label) + ':\t' + "\t".join(data) for label, data in zip(labelArr, valueArr)])
+            # printable = "\n".join([' '.join(label) + ':\t' + "\t".join(data) for label, data in zip(labelArr, valueArr)])
             comparison = f"Example {count}:\ntitleEntities: {entities}\ntitle: {title}Data:\n{printable.to_string()} \n\ngold: {gold}" \
                          f'gold_template: {goldTemplate}\ngenerated_template: {generated}generated: {reverse}\n\n'
             # print(comparison)
@@ -455,7 +463,8 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                     cleanLabel = ' '.join(label)
                     dico[cleanLabel] = value[i]
                 dataJson.append(dico)
-            websiteInput = {"title": title.strip(), "labels": [' '.join(label) for label in labelArr], "columnType": "multi", \
+            websiteInput = {"title": title.strip(), "labels": [' '.join(label) for label in labelArr],
+                            "columnType": "multi", \
                             "graphType": chartType, "summary": reversedSentences, "trends": cleanTemplates,
                             "data": dataJson, "gold": gold}
             with open(f'{websitePath}/{count}.json', 'w', encoding='utf-8') as websiteFile:
@@ -474,8 +483,6 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
             # remove filler words from labels
             cleanXLabel = [xWord for xWord in xLabel if xWord.lower() not in fillers]
             cleanYLabel = [yWord for yWord in yLabel if yWord.lower() not in fillers]
-
-
 
             for i in range(0, len(datum)):
                 if i % 2 == 0:
@@ -504,7 +511,7 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                             tokens.pop(i + 1)
                     if 'template' in token and 'Trend' not in token:
                         if 'idxmax' in token or 'idxmin' in token:
-                            #axis = token[-3].lower()
+                            # axis = token[-3].lower()
                             idxType = token[-7:-4]
                             if 'templateYValue' in token:
                                 templateAxis = 'x'
@@ -525,10 +532,12 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                         elif token == 'templateScale':
                             replacedToken = getScale(titleArr, cleanXLabel, cleanYLabel)
                         elif 'templateDelta' in token:
-                            indices = str(re.search(r"\[(.+)\]", token).group(0)).replace('[', '').replace(']', '').split(',')
+                            indices = str(re.search(r"\[(.+)\]", token).group(0)).replace('[', '').replace(']',
+                                                                                                           '').split(
+                                ',')
                             index1 = int(indices[0])
                             index2 = int(indices[1])
-                            delta = abs(round(float(yValueArr[index1])-float(yValueArr[index2])))
+                            delta = abs(round(float(yValueArr[index1]) - float(yValueArr[index2])))
                             replacedToken = str(delta)
                         else:
                             index = str(re.search(r"\[(\w+)\]", token).group(0)).replace('[', '').replace(']', '')
@@ -587,7 +596,7 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                                 else:
                                     print(f'title index error at {index} in {title}')
                                     replacedToken = titleArr[len(titleArr) - 1]
-                        sentenceTemplates[i] = {token:(replacedToken, index, templateAxis)}
+                        sentenceTemplates[i] = {token: (replacedToken, index, templateAxis)}
                     else:
                         replacedToken = token
                     if i > 2:
@@ -607,7 +616,7 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                 templateList.append(sentenceTemplates)
             # remove empty items
             reverse = ' '.join(reversedSentences)
-            #replace trend words after all templates inserted for better accuracy
+            # replace trend words after all templates inserted for better accuracy
 
             comparison = f'Example {count}:\ntitleEntities: {entities}\ntitle: {title}X_Axis{xLabel}: {xValueArr}\nY_Axis{yLabel}: {yValueArr}\n\ngold: {gold}' \
                          f'gold_template: {goldTemplate}\ngenerated_template: {generated}generated: {reverse}\n\n'
@@ -621,15 +630,15 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
             cleanTemplates = []
             for sentence in templateList:
                 newSentence = {}
-                #key is token index
-                #val is {template:replaced token}
+                # key is token index
+                # val is {template:replaced token}
                 for key, val in sentence.items():
                     template = [*val.keys()][0]
                     if 'templateXValue' in template or 'templateYValue' in template:
-                        #must track templates which are multi-word
+                        # must track templates which are multi-word
                         dataIndex = [*val.values()][0][1]
                         tokenIndex = key
-                        #axis = [*val.values()][0][2]
+                        # axis = [*val.values()][0][2]
                         if 'idxmax' in template:
                             # newSentence[key] = f'{axis}:{dataIndex}'
                             newSentence[tokenIndex] = f'{dataIndex}'
@@ -645,9 +654,9 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                         else:
                             # newSentence[key] = f'{axis}:{dataIndex}'
                             newSentence[tokenIndex] = f'{dataIndex}'
-                    #elif 'templateYValue' in template:
-                        #dataIndex = [*val.values()][0][1]
-                        #axis = [*val.values()][0][2]
+                        # elif 'templateYValue' in template:
+                        # dataIndex = [*val.values()][0][1]
+                        # axis = [*val.values()][0][2]
                         if 'idxmax' in template:
                             # newSentence[key] = f'{axis}:{dataIndex}'
                             newSentence[tokenIndex] = f'{dataIndex}'
@@ -664,11 +673,13 @@ with open(goldPath, 'r', encoding='utf-8') as goldFile, open(generatedPath, 'r',
                             # newSentence[key] = f'{axis}:{dataIndex}'
                             newSentence[tokenIndex] = f'{dataIndex}'
                 cleanTemplates.append(newSentence)
-            dataJson = [{' '.join(xLabel):xVal, ' '.join(yLabel):yVal} for xVal, yVal in zip(cleanXArr, cleanYArr)]
-            websiteInput = {"title":title.strip(), "xAxis":' '.join(xLabel), "yAxis":' '.join(yLabel), "columnType":"two", \
-                            "graphType":chartType, "summaryType":"nlp", "summary":reversedSentences, "trends":cleanTemplates, "data":dataJson, "gold": gold}
+            dataJson = [{' '.join(xLabel): xVal, ' '.join(yLabel): yVal} for xVal, yVal in zip(cleanXArr, cleanYArr)]
+            websiteInput = {"title": title.strip(), "xAxis": ' '.join(xLabel), "yAxis": ' '.join(yLabel),
+                            "columnType": "two", \
+                            "graphType": chartType, "summaryType": "nlp", "summary": reversedSentences,
+                            "trends": cleanTemplates, "data": dataJson, "gold": gold}
             with open(f'{websitePath}/{count}.json', 'w', encoding='utf-8') as websiteFile:
                 json.dump(websiteInput, websiteFile, indent=3)
-            #data = {' '.join(xLabel):cleanXArr, ' '.join(yLabel):cleanYArr}
-            #x = pd.DataFrame(data=data)
-            #x.to_csv(f'{newDataPath}/{count}.csv',index=False)
+            # data = {' '.join(xLabel):cleanXArr, ' '.join(yLabel):cleanYArr}
+            # x = pd.DataFrame(data=data)
+            # x.to_csv(f'{newDataPath}/{count}.csv',index=False)

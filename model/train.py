@@ -14,6 +14,7 @@ from src.model import check_model_params, build_model
 from src.trainer import EncDecTrainer, SingleTrainer
 from src.evaluation.evaluator import EncDecEvaluator, SingleEvaluator
 
+
 def get_parser():
     """
     Generate a parameters parser.
@@ -153,8 +154,8 @@ def get_parser():
                         help="eval cs")
     return parser
 
-def main(params):
 
+def main(params):
     # initialize the experiment
     logger = initialize_exp(params)
 
@@ -167,7 +168,6 @@ def main(params):
         model = build_model(params, data['source_dico'])
     else:
         encoder, decoder = build_model(params, data['source_dico'], data['target_dico'])
-
 
     # build trainer, reload potential checkpoints / build evaluator
     if params.encoder_only:
@@ -216,7 +216,6 @@ def main(params):
 
 
 if __name__ == '__main__':
-
     # generate parser / parse parameters
     parser = get_parser()
     params = parser.parse_args()

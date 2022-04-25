@@ -22,19 +22,21 @@ import torch
 
 from src.data.dictionary import Dictionary
 
+
 def print_args(args):
     print("summary:\t{}".format(args.summary))
     print("summary_label:\t{}".format(args.summary_label))
     print("summary_vocab:\t{}".format(args.summary_vocab))
     print("summary_max_length:\t{}".format(args.summary_max_length))
 
+
 if __name__ == '__main__':
     readme = ""
     parser = argparse.ArgumentParser(description=readme)
-    parser.add_argument('--summary', help = "summary dataOld")
-    parser.add_argument('--summary_vocab', help = "summary dataOld vocab")
-    parser.add_argument('--summary_label', help = "summary dataOld label")
-    parser.add_argument('--summary_max_length', type=int, default=600, help = "summmary maximum length")
+    parser.add_argument('--summary', help="summary dataOld")
+    parser.add_argument('--summary_vocab', help="summary dataOld vocab")
+    parser.add_argument('--summary_label', help="summary dataOld label")
+    parser.add_argument('--summary_max_length', type=int, default=600, help="summmary maximum length")
     args = parser.parse_args()
 
     if args.summary_vocab is None:
@@ -49,7 +51,5 @@ if __name__ == '__main__':
     print_args(args)
 
     summary_dico = Dictionary.read_vocab(args.summary_vocab)
-    summary_data = Dictionary.index_summary(args.summary, args.summary_label, summary_dico, 
-                                            args.summary+".pth", max_len=args.summary_max_length)
-
-
+    summary_data = Dictionary.index_summary(args.summary, args.summary_label, summary_dico,
+                                            args.summary + ".pth", max_len=args.summary_max_length)

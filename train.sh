@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --account=def-enamul
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:0
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=12G
 #SBATCH --time=0-12:00
 
-module load python/3.7 arch/avx512 StdEnv/2018.3
+module load python/3.8 arch/avx512 StdEnv/2018.3
 
 virtualenv --no-download $SLURM_TMPDIR/env
 source $SLURM_TMPDIR/env/bin/activate
