@@ -2,9 +2,15 @@
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+<<<<<<< Updated upstream
       <excludeFolder url="file://$MODULE_DIR$/nlg_venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (nlg_venv)" jdkType="Python SDK" />
+=======
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.8 (Chart2Text)" jdkType="Python SDK" />
+>>>>>>> Stashed changes
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

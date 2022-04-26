@@ -7,7 +7,7 @@ from sklearn import utils
 import spacy
 from spacy import displacy
 from collections import Counter
-import en_core_web_md
+# import en_core_web_md
 
 import nltk
 import pandas as pd
@@ -615,8 +615,13 @@ for m in range(len(dataFiles)):
             elif token.lower() in negativeTrends:
                 token = 'templateNegativeTrend'
                 trendIndicator = True
+<<<<<<< Updated upstream
             # if there is an unlabelled numeric token in a sentence containing a trend word, assume that token
             # is a delta between two values
+=======
+            # if there is an unlabelled numeric token in a sentence containing a trend word, assume that token is a
+            # delta between two values
+>>>>>>> Stashed changes
             if trendIndicator:
                 if token not in years:
                     if is_number(token):

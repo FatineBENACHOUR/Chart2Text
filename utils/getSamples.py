@@ -10,6 +10,7 @@ import weasyprint as wsp
 import PIL as pil
 import matplotlib.pyplot as plt
 
+
 def trim(source_filepath, target_filepath=None, background=None):
     if not target_filepath:
         target_filepath = source_filepath
